@@ -1,0 +1,32 @@
+pipeline {
+  agent any
+  tools {
+    maven 'Maven-3.6.3'
+    jdk 'open-jdk17'
+  }
+
+ environment {
+    SONAR_TOKEN = credentials('SONAR_OBJ')
+  }
+
+stages {
+     stage('Repo Scan using  Sonarcloud'){
+         steps {
+           script{
+          env.SONAR_TOKEN = "${SONAR_TOKEN}"
+          sh "mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -D sonar.projectKey=Shrutitl_Devopsandcloud"
+         }
+      }
+     }
+
+    stage('Pet clinic build using maven') {
+      steps {
+        script {
+            sh "mvn clean"
+            sh "mvn compile"
+            sh "mvn package"
+          }
+      }
+    } 
+   }
+ }
