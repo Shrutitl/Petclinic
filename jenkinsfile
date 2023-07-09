@@ -14,7 +14,7 @@ stages {
          steps {
            script{
           env.SONAR_TOKEN = "${SONAR_TOKEN}"
-          sh "mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -D sonar.projectKey=Shrutitl_Devopsandcloud"
+          sh "mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=Shrutitl_Petclinic"
          }
       }
      }
