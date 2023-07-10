@@ -1,7 +1,7 @@
 pipeline {
   agent any
   tools {
-    maven 'Maven-3.9.3'
+    maven 'Maven-3.6.3'
     jdk 'open-jdk17'
   }
 
@@ -14,8 +14,6 @@ stages {
         steps {
           script{
           env.SONAR_TOKEN = "${SONAR_TOKEN}"
-        //   sh"mvn verify sonar:sonar"
-          sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.6.0.1398:sonar'
           sh "mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=Shrutitl_Petclinic"
          }
       }
@@ -24,8 +22,7 @@ stages {
     stage('Pet clinic build using maven') {
       steps {
         script {
-           // sh "mvn clean"
-             sh 'mvn clean package -DskipTests=true'
+            sh 'mvn clean package -DskipTests=true'
             sh "mvn compile"
             sh "mvn package"
           }
